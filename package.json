@@ -1,0 +1,24 @@
+{
+  "name": "project_backend",
+  "version": "1.0.0",
+  "description": "that is my 1st practise in  my backend series ",
+  "keywords": [
+    "javascript",
+    "backend"
+  ],
+  "homepage": "https://github.com/subhranshu-dash/project_backend#readme",
+  "bugs": {
+    "url": "https://github.com/subhranshu-dash/project_backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/subhranshu-dash/project_backend.git"
+  },
+  "license": "ISC",
+  "author": "bapun",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
