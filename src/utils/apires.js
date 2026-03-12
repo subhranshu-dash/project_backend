@@ -1,0 +1,3 @@
+class apiresponse{
+    constructor()
+}
