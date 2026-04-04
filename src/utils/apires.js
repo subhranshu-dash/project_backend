@@ -1,3 +1,5 @@
 class apiresponse{
-    constructor()
+    constructor(req ,res ,next ){
+
+    }
 }

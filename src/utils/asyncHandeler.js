@@ -1,5 +1,6 @@
-const asynchandeler = (reqhandeler)=>{(req,res,next)=>{
-       Promise.resolve(reqhandeler(req,res,next)).catch((err)=>next(err))
+const asynchandeler = (reqhandeler)=>{
+       return(req,res,next)=>{
+      return Promise.resolve(reqhandeler(req,res,next)).catch((err)=>next(err))
 }}
 
 
