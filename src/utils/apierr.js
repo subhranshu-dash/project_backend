@@ -4,3 +4,4 @@ class ApiError {
         this.message = message;
     }
 }
+export {ApiError}

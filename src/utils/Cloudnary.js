@@ -39,11 +39,11 @@ const cloudinaryfileupload = async (localpath)=>{
 
 
 
- cloudinary.v2.uploader.upload("dog.mp4", {
-  resource_type: "video", 
-  public_id: "my_dog",
-  overwrite: true, 
-  notification_url: "https://mysite.example.com/notify_endpoint"})
-.then(result=>console.log(result));
+//  cloudinary.v2.uploader.upload("dog.mp4", {
+//   resource_type: "video", 
+//   public_id: "my_dog",
+//   overwrite: true, 
+//   notification_url: "https://mysite.example.com/notify_endpoint"})
+// .then(result=>console.log(result));
 
 export default cloudinary; 
