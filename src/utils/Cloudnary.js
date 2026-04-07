@@ -1,49 +1,51 @@
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
+import fs from "fs";
 
 dotenv.config();
 
+// ✅ Proper config (FIXED ENV NAMES)
 cloudinary.config({
-  cloud_name: process.env.CLOUDNARY_NAME,
-  api_key: process.env.CLOUDNARY_APIKYE,
-  api_secret: process.env.CLOUDNARY_APISECRET,
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_APIKYE,
+  api_secret: process.env.CLOUDINARY_APISECRET,
 });
 
-const cloudinaryfileupload = async (localpath)=>{
-    try{
-
-     if(!localpath) return null
-     //upload the file cloudnary
-     const response = cloudinary.uploader.upload( localpath,{
-        resource_type :"auto"
-     })
-     //file successfully uploaded
-     console.log("file uploaded sucessfuly",response.url)
-     return response
-     
-
-
-
-    }catch(error){
-       FileSystem.unlikesync(localpath)//file deleted in the local path
+// ✅ Upload function (ROBUST + SAFE)
+const uploadOnCloudinary = async (localFilePath) => {
+  try {
+    if (!localFilePath) {
+      console.log("No file path provided");
+      return null;
     }
 
-}
+    // ✅ check file exists
+    if (!fs.existsSync(localFilePath)) {
+      console.log("File does not exist:", localFilePath);
+      return null;
+    }
 
+    // ✅ upload
+    const response = await cloudinary.uploader.upload(localFilePath, {
+      resource_type: "auto",
+    });
 
+    console.log("✅ Upload Success:", response.secure_url);
 
+    // ✅ delete local file after success
+    fs.unlinkSync(localFilePath);
 
+    return response;
+  } catch (error) {
+    console.log("❌ Cloudinary Error:", error);
 
+    // ✅ delete file if exists
+    if (localFilePath && fs.existsSync(localFilePath)) {
+      fs.unlinkSync(localFilePath);
+    }
 
+    return null;
+  }
+};
 
-
-
-
-//  cloudinary.v2.uploader.upload("dog.mp4", {
-//   resource_type: "video", 
-//   public_id: "my_dog",
-//   overwrite: true, 
-//   notification_url: "https://mysite.example.com/notify_endpoint"})
-// .then(result=>console.log(result));
-
-export default cloudinary; 
+export { uploadOnCloudinary };
