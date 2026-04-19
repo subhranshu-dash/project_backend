@@ -30,7 +30,7 @@ const userSchema = new Schema(
       required: true,
     },
 
-    // ✅ FIX: optional + default value
+    //  FIX: optional + default value
     coverImage: {
       type: String,
       default: "",
@@ -59,7 +59,7 @@ const userSchema = new Schema(
 
 
 
-// 🔐 Password hash (FIXED - no next)
+//  Password hash (FIXED - no next)
 userSchema.pre("save", async function () {
   if (!this.isModified("password")) return;
 
@@ -68,14 +68,14 @@ userSchema.pre("save", async function () {
 
 
 
-// 🔑 Password check
+//  Password check
 userSchema.methods.isPasswordCorrect = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
 
 
-// 🔐 Access Token
+//  Access Token
 userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
@@ -93,7 +93,7 @@ userSchema.methods.generateAccessToken = function () {
 
 
 
-// 🔄 Refresh Token
+//  Refresh Token
 userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
@@ -108,5 +108,5 @@ userSchema.methods.generateRefreshToken = function () {
 
 
 
-// ✅ Export
+//  Export
 export const User = mongoose.model("User", userSchema);
